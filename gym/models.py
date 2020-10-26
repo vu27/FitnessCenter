@@ -2,13 +2,13 @@ from django.db import models
 
 
 class MembershipTier(models.Model):
-    tier_name = models.CharField(primary_key=True)
+    tier_name = models.CharField(primary_key=True, max_length=30)
     name = models.CharField(max_length=30)
     price = models.FloatField(max_length=None)
 
 
 class Member(models.Model):
-    member_id = models.IntegerField(primary_key=True, max_length=None)
+    member_id = models.IntegerField(primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField(max_length=75)
@@ -23,22 +23,22 @@ class Facility(models.Model):
 
 
 class Employee(models.Model):
-    employee_id = models.IntegerField(primary_key=True, max_length=None)
+    employee_id = models.IntegerField(primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    phone = models.IntegerField(max_length=12)
+    phone = models.IntegerField()
     facility = models.ForeignKey(Facility, on_delete=models.CASCADE)
 
 
 class Job(models.Model):
-    job_code = models.IntegerField(primary_key=True, max_length=25)
-    description = models.CharField(max_length=500)
+    job_code = models.IntegerField(primary_key=True)
+    description = models.CharField(max_length=255)
     salary = models.FloatField(max_length=None)
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
 
 class Equipment(models.Model):
-    equip_name = models.IntegerField(primary_key=True, max_length=75)
+    equip_name = models.IntegerField(primary_key=True)
     price = models.FloatField(max_length=None)
-    quantity = models.IntegerField(max_length=500)
+    quantity = models.IntegerField()
     facility_name = models.ForeignKey(Facility, on_delete=models.CASCADE)
