@@ -50,7 +50,7 @@ class Employee(models.Model):
     emp_id = models.AutoField(primary_key=True)
     emp_fname = models.CharField(max_length=MAX_LENGTH)
     emp_lname = models.CharField(max_length=MAX_LENGTH)
-    emp_phone = models.IntegerField()
+    emp_phone = models.CharField(max_length=MAX_LENGTH)
     fac_id = models.ForeignKey(Facility, db_column="fac_id", on_delete=models.CASCADE)
 
     class Meta:
