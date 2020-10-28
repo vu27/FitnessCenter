@@ -1,3 +1,3 @@
 from django.urls import path, include
 
-urlpatterns = [path("", include("gym.urls"))]
+urlpatterns = [path("", include("api.urls"))]
