@@ -1,11 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
 
-const Home = () => {
-  return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
-  );
-};
+class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  componentDidMount() {}
+
+  render() {
+    return <h1>ICS 311</h1>;
+  }
+}
 
 export default Home;
