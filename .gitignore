@@ -23,6 +23,7 @@ bin/
 Bin/
 obj/
 Obj/
+wwwroot
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -253,4 +254,4 @@ run
 runserver
 .vscode
 serve 
-build
+
