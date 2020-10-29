@@ -13,11 +13,11 @@ class Employee extends Component {
   async componentDidMount() {
     if (process.env.REACT_APP_DEVELOPMENT) {
       await this.setState({
-        serverURL: "http://127.0.0.1:8000/api/employee/",
+        serverURL: "https://localhost:5001/api/tier/",
       });
     } else {
       await this.setState({
-        serverURL: window.location.origin + "/api/employee/",
+        serverURL: window.location.origin + "/api/tier/",
       });
     }
 
@@ -44,12 +44,12 @@ class Employee extends Component {
   render() {
     const { employees } = this.state;
     return (
-      <div class="container">
+      <div className="container">
         <h1>EMPLOYEES</h1>
 
-        <div class="row">
+        <div className="row">
           <button
-            class="btn btn-success"
+            className="btn btn-success"
             style={{
               marginTop: "30px",
               marginBottom: "30px",
@@ -61,8 +61,8 @@ class Employee extends Component {
           </button>
         </div>
 
-        <div class="row">
-          <table class="table table-striped">
+        <div className="row">
+          <table className="table table-striped">
             <thead>
               <tr>
                 <th scope="col">ID</th>
@@ -74,8 +74,8 @@ class Employee extends Component {
               </tr>
             </thead>
             <tbody>
-              {employees.map((employee) => (
-                <tr>
+              {employees.map((employee, i) => (
+                <tr key={i}>
                   <th scope="row">{employee.emp_id}</th>
                   <td>{employee.emp_fname}</td>
                   <td>{employee.emp_lname}</td>
@@ -83,13 +83,16 @@ class Employee extends Component {
                   <td>{employee.fac_id}</td>
                   <td>
                     <button
-                      class="btn btn-primary"
+                      className="btn btn-primary"
                       style={{ width: "90px", marginRight: "25px" }}
                     >
                       Edit
                     </button>
 
-                    <button class="btn btn-danger" style={{ width: "90px" }}>
+                    <button
+                      className="btn btn-danger"
+                      style={{ width: "90px" }}
+                    >
                       Delete
                     </button>
                   </td>
