@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../App.css";
 
 class Nav extends Component {
@@ -8,52 +9,52 @@ class Nav extends Component {
         <div className="bg-light border-right" id="sidebar-wrapper">
           <div className="nav-heading">
             <b>Fitness Center</b>
-            <p style={{marginBottom: 0}}>ICS 311 Term Project</p>
+            <p style={{ marginBottom: 0 }}>ICS 311 Term Project</p>
             <p>by Tung Vu</p>
           </div>
           <div className="list-group list-group-flush">
-            <a
-              href="#"
+            <Link
+              to="member"
               className="list-group-item list-group-item-action bg-light"
             >
               Members
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="tier"
               className="list-group-item list-group-item-action bg-light"
             >
               Membership Tiers
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="facility"
               className="list-group-item list-group-item-action bg-light"
             >
               Facilities
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="sharedfacility"
               className="list-group-item list-group-item-action bg-light"
             >
               Shared Facilities
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="equipment"
               className="list-group-item list-group-item-action bg-light"
             >
               Equipment
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="employee"
               className="list-group-item list-group-item-action bg-light"
             >
               Employees
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="job"
               className="list-group-item list-group-item-action bg-light"
             >
               Jobs
-            </a>
+            </Link>
           </div>
         </div>
 
