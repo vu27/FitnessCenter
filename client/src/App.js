@@ -1,14 +1,13 @@
 import React from "react";
 import { Route } from "react-router";
-import Home from "./components/Home";
+import Nav from "./components/Nav";
 import Employee from "./components/employee/Employee";
 
 function App() {
   return (
-    <div className="App">
-      <Route exact path="/" component={Home} />
-      <Route exact path="/employees" component={Employee} />
-    </div>
+    <Nav>
+      <Route exact path="/" component={Employee} />
+    </Nav>
   );
 }
 

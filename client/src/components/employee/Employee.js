@@ -11,15 +11,17 @@ class Employee extends Component {
   }
 
   async componentDidMount() {
-    if (process.env.REACT_APP_DEVELOPMENT) {
+    console.log(process.env.REACT_APP_DEVELOPMENT)
+    if (process.env.REACT_APP_DEVELOPMENT === "true") {
       await this.setState({
-        serverURL: "https://localhost:5001/api/tier/",
+        serverURL: "https://localhost:5001/api/employee",
       });
     } else {
       await this.setState({
-        serverURL: window.location.origin + "/api/tier/",
+        serverURL: window.location.origin + "/api/employee",
       });
     }
+    console.log(this.state.serverURL)
 
     await fetch(this.state.serverURL, {
       method: "GET",
@@ -74,8 +76,8 @@ class Employee extends Component {
               </tr>
             </thead>
             <tbody>
-              {employees.map((employee, i) => (
-                <tr key={i}>
+              {employees.map((employee) => (
+                <tr key={employee.emp_id}>
                   <th scope="row">{employee.emp_id}</th>
                   <td>{employee.emp_fname}</td>
                   <td>{employee.emp_lname}</td>

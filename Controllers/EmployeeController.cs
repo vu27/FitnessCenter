@@ -12,48 +12,48 @@ namespace FitnessCenter.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TierController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public TierController(DataContext context)
+        public EmployeeController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Tier
+        // GET: api/Employee
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MembershipTier>>> GetMembership_Tier()
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee()
         {
-            return await _context.Membership_Tier.ToListAsync();
+            return await _context.Employee.ToListAsync();
         }
 
-        // GET: api/Tier/5
+        // GET: api/Employee/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<MembershipTier>> GetMembershipTier(int id)
+        public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
-            var membershipTier = await _context.Membership_Tier.FindAsync(id);
+            var employee = await _context.Employee.FindAsync(id);
 
-            if (membershipTier == null)
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return membershipTier;
+            return employee;
         }
 
-        // PUT: api/Tier/5
+        // PUT: api/Employee/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMembershipTier(int id, MembershipTier membershipTier)
+        public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
-            if (id != membershipTier.Tier_code)
+            if (id != employee.Emp_id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(membershipTier).State = EntityState.Modified;
+            _context.Entry(employee).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace FitnessCenter.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MembershipTierExists(id))
+                if (!EmployeeExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace FitnessCenter.Controllers
             return NoContent();
         }
 
-        // POST: api/Tier
+        // POST: api/Employee
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<MembershipTier>> PostMembershipTier(MembershipTier membershipTier)
+        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
-            _context.Membership_Tier.Add(membershipTier);
+            _context.Employee.Add(employee);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMembershipTier", new { id = membershipTier.Tier_code }, membershipTier);
+            return CreatedAtAction("GetEmployee", new { id = employee.Emp_id }, employee);
         }
 
-        // DELETE: api/Tier/5
+        // DELETE: api/Employee/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<MembershipTier>> DeleteMembershipTier(int id)
+        public async Task<ActionResult<Employee>> DeleteEmployee(int id)
         {
-            var membershipTier = await _context.Membership_Tier.FindAsync(id);
-            if (membershipTier == null)
+            var employee = await _context.Employee.FindAsync(id);
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            _context.Membership_Tier.Remove(membershipTier);
+            _context.Employee.Remove(employee);
             await _context.SaveChangesAsync();
 
-            return membershipTier;
+            return employee;
         }
 
-        private bool MembershipTierExists(int id)
+        private bool EmployeeExists(int id)
         {
-            return _context.Membership_Tier.Any(e => e.Tier_code == id);
+            return _context.Employee.Any(e => e.Emp_id == id);
         }
     }
 }
