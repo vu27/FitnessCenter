@@ -14,11 +14,11 @@ class Members extends Component {
     console.log(process.env.REACT_APP_DEVELOPMENT);
     if (process.env.REACT_APP_DEVELOPMENT === "true") {
       await this.setState({
-        serverURL: "https://localhost:5001/api/employee",
+        serverURL: "http://localhost:8080/api/employee/",
       });
     } else {
       await this.setState({
-        serverURL: window.location.origin + "/api/employee",
+        serverURL: window.location.origin + "/api/employee/",
       });
     }
     console.log(this.state.serverURL);
@@ -79,7 +79,7 @@ class Members extends Component {
 
         <div className="row" style={{textAlign: "center"}}>
           <table className="table table-bordered">
-            <thead class="thead-dark">
+            <thead className="thead-dark">
               <tr>
                 <th scope="col">ID</th>
                 <th scope="col">First Name</th>

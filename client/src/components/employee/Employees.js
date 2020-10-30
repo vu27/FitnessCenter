@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Employee extends Component {
+class Employees extends Component {
   constructor(props) {
     super(props);
 
@@ -11,7 +11,7 @@ class Employee extends Component {
   }
 
   async componentDidMount() {
-    console.log(process.env.REACT_APP_DEVELOPMENT)
+    console.log(process.env.REACT_APP_DEVELOPMENT);
     if (process.env.REACT_APP_DEVELOPMENT === "true") {
       await this.setState({
         serverURL: "http://localhost:8080/api/employee/",
@@ -21,9 +21,9 @@ class Employee extends Component {
         serverURL: window.location.origin + "/api/employee/",
       });
     }
-    console.log(this.state.serverURL)
+    console.log(this.state.serverURL);
 
-    await fetch(this.state.serverURL + "all", {
+    await fetch(this.state.serverURL, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -46,33 +46,47 @@ class Employee extends Component {
   render() {
     const { employees } = this.state;
     return (
-      <div className="container">
-        <h1>EMPLOYEES</h1>
+      <div style={{ padding: "40px" }}>
+        <div className="row">
+          <h1>EMPLOYEES TABLE</h1>
+        </div>
 
         <div className="row">
           <button
             className="btn btn-success"
             style={{
-              marginTop: "30px",
+              marginTop: "20px",
+              marginBottom: "30px",
+              marginRight: "30px",
+              width: "200px",
+              height: "80px",
+            }}
+          >
+            Add Member
+          </button>
+          <button
+            className="btn btn-primary"
+            style={{
+              marginTop: "20px",
               marginBottom: "30px",
               width: "200px",
               height: "80px",
             }}
           >
-            Add Employee
+            Search Members
           </button>
         </div>
 
-        <div className="row">
-          <table className="table table-striped">
-            <thead>
+        <div className="row" style={{ textAlign: "center" }}>
+          <table className="table table-bordered">
+            <thead className="thead-dark">
               <tr>
                 <th scope="col">ID</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Facility</th>
-                <th scope="col">ACTIONS</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -85,7 +99,7 @@ class Employee extends Component {
                   <td>{employee.fac_id}</td>
                   <td>
                     <button
-                      className="btn btn-primary"
+                      className="btn btn-warning"
                       style={{ width: "90px", marginRight: "25px" }}
                     >
                       Edit
@@ -108,4 +122,4 @@ class Employee extends Component {
   }
 }
 
-export default Employee;
+export default Employees;

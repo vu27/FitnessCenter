@@ -19,39 +19,16 @@ public class FitnessCenterApplication {
 		SpringApplication.run(FitnessCenterApplication.class, args);
 	}
 
+	// Enable CORS policy for spring server port 8080 and react.js node server port
+	// 3000.
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://127.0.0.1:8080");
+				registry.addMapping("/**").allowedOrigins("http://127.0.0.1:8080", "http://localhost:3000");
 			}
 		};
 	}
 
-	@CrossOrigin
-	@RestController
-	public class IndexController implements ErrorController {
-
-		private static final String PATH = "/error";
-
-		@RequestMapping(value = PATH)
-		public ModelAndView saveLeadQuery() {
-			return new ModelAndView("forward:/");
-		}
-
-		@Override
-		public String getErrorPath() {
-			return PATH;
-		}
-	}
-
-	@Controller
-	public class CustomErrorController implements ErrorController {
-
-		@Override
-		public String getErrorPath() {
-			return "/error";
-		}
-	}
 }
