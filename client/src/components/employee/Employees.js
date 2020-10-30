@@ -14,16 +14,16 @@ class Employee extends Component {
     console.log(process.env.REACT_APP_DEVELOPMENT)
     if (process.env.REACT_APP_DEVELOPMENT === "true") {
       await this.setState({
-        serverURL: "https://localhost:5001/api/employee",
+        serverURL: "http://localhost:8080/api/employee/",
       });
     } else {
       await this.setState({
-        serverURL: window.location.origin + "/api/employee",
+        serverURL: window.location.origin + "/api/employee/",
       });
     }
     console.log(this.state.serverURL)
 
-    await fetch(this.state.serverURL, {
+    await fetch(this.state.serverURL + "all", {
       method: "GET",
       headers: {
         Accept: "application/json",
