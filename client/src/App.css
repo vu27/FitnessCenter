@@ -5,6 +5,10 @@
 #sidebar-wrapper {
   min-height: 100vh;
   margin-left: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
 }
 
 #sidebar-wrapper .sidebar-heading {
@@ -25,6 +29,7 @@
 #page-content-wrapper {
   min-width: 0;
   width: 100%;
+  margin-left: 15rem;
 }
 
 #wrapper.toggled #sidebar-wrapper {

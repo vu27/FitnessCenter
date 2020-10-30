@@ -8,6 +8,7 @@ function App() {
   return (
     <Nav>
       <Route exact path="/" component={Members} />
+      <Route path="/members" component={Members} />
       <Route path="/employees" component={Employees} />
     </Nav>
   );

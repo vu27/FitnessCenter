@@ -44,7 +44,7 @@ class Employees extends Component {
   }
 
   render() {
-    const { employees } = this.state;
+    const { employees, serverURL } = this.state;
     return (
       <div style={{ padding: "40px" }}>
         <div className="row">
@@ -60,6 +60,32 @@ class Employees extends Component {
               marginRight: "30px",
               width: "200px",
               height: "80px",
+            }}
+            onClick={async () => {
+              await fetch(serverURL, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  emp_fname: "email",
+                  emp_lname: "password",
+                  emp_phone: "password",
+                  fac_id: 1,
+                }),
+              })
+                .then((res) => res.json())
+                .then(
+                  (result) => {
+                    console.log(result.message);
+                    // this.setState({
+                    //   employees: result,
+                    // });
+                  },
+                  (error) => {
+                    console.log(error);
+                  }
+                );
             }}
           >
             Add Member
@@ -89,6 +115,7 @@ class Employees extends Component {
                 <th scope="col">Actions</th>
               </tr>
             </thead>
+
             <tbody>
               {employees.map((employee) => (
                 <tr key={employee.emp_id}>
@@ -108,6 +135,22 @@ class Employees extends Component {
                     <button
                       className="btn btn-danger"
                       style={{ width: "90px" }}
+                      onClick={async () => {
+                        await fetch(serverURL + employee.emp_id, {
+                          method: "DELETE",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                        })
+                          .then(
+                            (result) => {
+                              window.location.reload();
+                            },
+                            (error) => {
+                              console.log(error);
+                            }
+                          );
+                      }}
                     >
                       Delete
                     </button>
