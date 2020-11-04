@@ -10,6 +10,7 @@ class Employees extends Component {
     };
   }
 
+  // Get employees from MySQL db on component init
   async componentDidMount() {
     console.log(process.env.REACT_APP_DEVELOPMENT);
     if (process.env.REACT_APP_DEVELOPMENT === "true") {
@@ -53,7 +54,7 @@ class Employees extends Component {
 
         <div className="row">
           <button
-            className="btn btn-success"
+            className="btn btn-primary"
             style={{
               marginTop: "20px",
               marginBottom: "30px",
@@ -141,15 +142,14 @@ class Employees extends Component {
                           headers: {
                             "Content-Type": "application/json",
                           },
-                        })
-                          .then(
-                            (result) => {
-                              window.location.reload();
-                            },
-                            (error) => {
-                              console.log(error);
-                            }
-                          );
+                        }).then(
+                          (result) => {
+                            window.location.reload();
+                          },
+                          (error) => {
+                            console.log(error);
+                          }
+                        );
                       }}
                     >
                       Delete
