@@ -2,6 +2,7 @@ package com.csvu.FitnessCenter.controller;
 
 import java.util.HashMap;
 import java.util.Optional;
+
 import com.csvu.FitnessCenter.model.Employee;
 import com.csvu.FitnessCenter.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,14 @@ public class EmployeeController {
     private EmployeeRepository employeeRepository;
 
     @GetMapping()
-    public @ResponseBody Iterable<Employee> getAllEmployees() {
+    public @ResponseBody
+    Iterable<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
     @PostMapping()
-    public @ResponseBody HashMap<String, String> createEmployee(@RequestBody Employee newEmployee) {
+    public @ResponseBody
+    HashMap<String, String> createEmployee(@RequestBody Employee newEmployee) {
         employeeRepository.save(newEmployee);
 
         HashMap<String, String> responseJSON = new HashMap<>();
@@ -37,8 +40,9 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public @ResponseBody HashMap<String, String> updateEmployee(@RequestBody Employee updatedEmployee,
-            @PathVariable int id) {
+    public @ResponseBody
+    HashMap<String, String> updateEmployee(@RequestBody Employee updatedEmployee,
+                                           @PathVariable int id) {
         HashMap<String, String> responseJSON = new HashMap<>();
         Optional<Employee> employeeOptional = employeeRepository.findById(id);
 
@@ -52,9 +56,10 @@ public class EmployeeController {
         return responseJSON;
     }
 
-    @CrossOrigin(origins = { "http://localhost:8080", "http://localhost:3000" })
+    @CrossOrigin(origins = {"http://localhost:8080", "http://localhost:3000"})
     @DeleteMapping("/{id}")
-    public @ResponseBody HashMap<String, String> deleteEmployee(@PathVariable int id) {
+    public @ResponseBody
+    HashMap<String, String> deleteEmployee(@PathVariable int id) {
         HashMap<String, String> responseJSON = new HashMap<>();
         employeeRepository.deleteById(id);
         responseJSON.put("message", "Successfully deleted employee.");
