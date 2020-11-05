@@ -1,0 +1,3 @@
+rm -rf wwwroot
+cd Client
+npm run-script build
