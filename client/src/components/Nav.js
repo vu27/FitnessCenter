@@ -14,7 +14,7 @@ class Nav extends Component {
           </div>
           <div className="list-group list-group-flush">
             <Link
-              to="member"
+              to="members"
               className="list-group-item list-group-item-action bg-light"
             >
               Members
@@ -44,7 +44,7 @@ class Nav extends Component {
               Equipment
             </Link>
             <Link
-              to="employee"
+              to="employees"
               className="list-group-item list-group-item-action bg-light"
             >
               Employees

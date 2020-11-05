@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Employee extends Component {
+class Employees extends Component {
   constructor(props) {
     super(props);
 
@@ -10,18 +10,19 @@ class Employee extends Component {
     };
   }
 
+  // Get employees from MySQL db on component init
   async componentDidMount() {
-    console.log(process.env.REACT_APP_DEVELOPMENT)
+    console.log(process.env.REACT_APP_DEVELOPMENT);
     if (process.env.REACT_APP_DEVELOPMENT === "true") {
       await this.setState({
-        serverURL: "https://localhost:5001/api/employee",
+        serverURL: "http://localhost:8080/api/employee/",
       });
     } else {
       await this.setState({
-        serverURL: window.location.origin + "/api/employee",
+        serverURL: window.location.origin + "/api/employee/",
       });
     }
-    console.log(this.state.serverURL)
+    console.log(this.state.serverURL);
 
     await fetch(this.state.serverURL, {
       method: "GET",
@@ -44,37 +45,78 @@ class Employee extends Component {
   }
 
   render() {
-    const { employees } = this.state;
+    const { employees, serverURL } = this.state;
     return (
-      <div className="container">
-        <h1>EMPLOYEES</h1>
+      <div style={{ padding: "40px" }}>
+        <div className="row">
+          <h1>EMPLOYEES TABLE</h1>
+        </div>
 
         <div className="row">
           <button
-            className="btn btn-success"
+            className="btn btn-primary"
             style={{
-              marginTop: "30px",
+              marginTop: "20px",
+              marginBottom: "30px",
+              marginRight: "30px",
+              width: "200px",
+              height: "80px",
+            }}
+            onClick={async () => {
+              await fetch(serverURL, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  emp_fname: "email",
+                  emp_lname: "password",
+                  emp_phone: "password",
+                  fac_id: 1,
+                }),
+              })
+                .then((res) => res.json())
+                .then(
+                  (result) => {
+                    console.log(result.message);
+                    // this.setState({
+                    //   employees: result,
+                    // });
+                  },
+                  (error) => {
+                    console.log(error);
+                  }
+                );
+            }}
+          >
+            Add Member
+          </button>
+          <button
+            className="btn btn-primary"
+            style={{
+              marginTop: "20px",
               marginBottom: "30px",
               width: "200px",
               height: "80px",
             }}
           >
-            Add Employee
+            Search Members
           </button>
         </div>
 
-        <div className="row">
-          <table className="table table-striped">
-            <thead>
+        <div className="row" style={{ textAlign: "center" }}>
+          <table className="table table-bordered">
+            <thead className="thead-dark">
               <tr>
                 <th scope="col">ID</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Facility</th>
-                <th scope="col">ACTIONS</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
+
             <tbody>
               {employees.map((employee) => (
                 <tr key={employee.emp_id}>
@@ -85,7 +127,7 @@ class Employee extends Component {
                   <td>{employee.fac_id}</td>
                   <td>
                     <button
-                      className="btn btn-primary"
+                      className="btn btn-warning"
                       style={{ width: "90px", marginRight: "25px" }}
                     >
                       Edit
@@ -94,6 +136,21 @@ class Employee extends Component {
                     <button
                       className="btn btn-danger"
                       style={{ width: "90px" }}
+                      onClick={async () => {
+                        await fetch(serverURL + employee.emp_id, {
+                          method: "DELETE",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                        }).then(
+                          (result) => {
+                            window.location.reload();
+                          },
+                          (error) => {
+                            console.log(error);
+                          }
+                        );
+                      }}
                     >
                       Delete
                     </button>
@@ -108,4 +165,4 @@ class Employee extends Component {
   }
 }
 
-export default Employee;
+export default Employees;
