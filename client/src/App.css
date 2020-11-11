@@ -1,3 +1,4 @@
+/* NAV MENU */
 #wrapper {
   overflow-x: hidden;
 }
@@ -17,9 +18,15 @@
 }
 
 .nav-heading {
-  padding: 0.875rem 1.25rem;
+  padding: 0.875rem 1.25rem 0rem;
   font-size: 1.2rem;
-  height: 8rem;
+  height: 7rem;
+}
+
+.sub-nav-heading {
+  padding: 0.875rem 1.25rem 0rem;
+  font-size: 1.2rem;
+  height: 4rem;
 }
 
 #sidebar-wrapper .list-group {
@@ -35,3 +42,4 @@
 #wrapper.toggled #sidebar-wrapper {
   margin-left: 0;
 }
+/* END NAV MENU */

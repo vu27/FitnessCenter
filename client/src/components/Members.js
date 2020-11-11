@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Members extends Component {
+class MemberTable extends Component {
   constructor(props) {
     super(props);
 
@@ -47,8 +47,11 @@ class Members extends Component {
     const { employees } = this.state;
     return (
       <div style={{ padding: "40px" }}>
+        {/* <div className="row justify-content-center">
+          <h1 className="display-2">MEMBERS TABLE</h1>
+        </div>
         <div className="row">
-          <h1>MEMBERS TABLE</h1>
+          <h1 style={{fontSize: '60px'}}>FORM 1</h1>
         </div>
 
         <div className="row">
@@ -86,7 +89,6 @@ class Members extends Component {
                 <th scope="col">Last Name</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Facility</th>
-                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -97,29 +99,14 @@ class Members extends Component {
                   <td>{employee.emp_lname}</td>
                   <td>{employee.emp_phone}</td>
                   <td>{employee.fac_id}</td>
-                  <td>
-                    <button
-                      className="btn btn-warning"
-                      style={{ width: "90px", marginRight: "25px" }}
-                    >
-                      Edit
-                    </button>
-
-                    <button
-                      className="btn btn-danger"
-                      style={{ width: "90px" }}
-                    >
-                      Delete
-                    </button>
-                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
+        </div> */}
       </div>
     );
   }
 }
 
-export default Members;
+export default MemberTable;
