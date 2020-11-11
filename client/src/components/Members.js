@@ -14,7 +14,7 @@ class MemberTable extends Component {
     console.log(process.env.REACT_APP_DEVELOPMENT);
     if (process.env.REACT_APP_DEVELOPMENT === "true") {
       await this.setState({
-        serverURL: "https://localhost:5001/api/employee/",
+        serverURL: "http://localhost:8080/api/employee/",
       });
     } else {
       await this.setState({
@@ -47,7 +47,7 @@ class MemberTable extends Component {
     const { employees } = this.state;
     return (
       <div style={{ padding: "40px" }}>
-        <div className="row justify-content-center">
+        {/* <div className="row justify-content-center">
           <h1 className="display-2">MEMBERS TABLE</h1>
         </div>
         <div className="row">
@@ -103,7 +103,7 @@ class MemberTable extends Component {
               ))}
             </tbody>
           </table>
-        </div>
+        </div> */}
       </div>
     );
   }
