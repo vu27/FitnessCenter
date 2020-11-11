@@ -9,7 +9,7 @@ namespace Models
         {
             get; set;
         }
-        public string emp_fname
+        public string Emp_fname
         {
             get; set;
         }

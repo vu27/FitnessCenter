@@ -1,5 +1,4 @@
 using System.IO;
-using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,7 +41,7 @@ namespace FitnessCenter
             services.AddControllersWithViews();
             services.AddControllers();
 
-            services.AddDbContext<DataContext>(options => options.UseMySql(Configuration.GetConnectionString("MySQLConnect")));
+            services.AddDbContext<DataContext>(options => options.UseMySql(Configuration.GetConnectionString("Local_MySQL_Connection_String")));
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
