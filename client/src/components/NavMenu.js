@@ -35,12 +35,6 @@ class Nav extends Component {
               Facilities
             </Link>
             <Link
-              to="sharedfacility"
-              className="list-group-item list-group-item-action bg-light"
-            >
-              Shared Facilities
-            </Link>
-            <Link
               to="equipment"
               className="list-group-item list-group-item-action bg-light"
             >

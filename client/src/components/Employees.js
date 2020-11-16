@@ -1,4 +1,4 @@
-aimport React, { Component } from "react";
+import React, { Component } from "react";
 
 class Employees extends Component {
   constructor(props) {
@@ -6,55 +6,126 @@ class Employees extends Component {
 
     this.state = {
       serverURL: "",
-      // Form 1 array
-      employees: [],
+      // Form 1
+      f1_employees: [],
       formOneId: 0,
+      // Form 2
+      f2_employees: [],
+      formTwoId: 0,
+      // Form 3
+      f3_employees: [],
+      searchId: "",
     };
 
     this.setFirstId = this.setFirstId.bind(this);
-    this.setPrevioustId = this.setPrevioustId.bind(this);
+    this.setPrevId = this.setPrevId.bind(this);
     this.setNextId = this.setNextId.bind(this);
     this.setLastId = this.setLastId.bind(this);
+    this.search = this.search.bind(this);
   }
 
-  setFirstId() {
-    this.setState({
-      formOneId: 0,
-    });
+  // Search function for form 3
+  search() {
+    fetch(
+      this.state.serverURL + "/form_three/employee/" + this.state.searchId,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            f3_employees: result,
+          });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
-  setPrevioustId() {
-    let newId = this.state.formOneId;
+  // Used to keep track of current row displayed in form one/two - set to first Id
+  setFirstId(form) {
+    if (form === "formOne") {
+      this.setState({
+        formOneId: 0,
+      });
+    } else if (form === "formTwo") {
+      this.setState({
+        formTwoId: 0,
+      });
+    }
+  }
+
+  // Used to keep track of current row displayed in form one/two - set to previous Id
+  setPrevId(form) {
+    let newId =
+      form === "formOne" ? this.state.formOneId : this.state.formTwoId;
 
     if (newId == 0) {
-      newId = this.state.employees.length - 1;
+      if (form === "formOne") {
+        newId = this.state.f1_employees.length - 1;
+      } else {
+        newId = this.state.f2_employees.length - 1;
+      }
     } else {
       newId--;
     }
 
-    this.setState({
-      formOneId: newId,
-    });
+    if (form === "formOne") {
+      this.setState({
+        formOneId: newId,
+      });
+    } else {
+      this.setState({
+        formTwoId: newId,
+      });
+    }
   }
 
-  setNextId() {
-    let newId = this.state.formOneId;
+  // Used to keep track of current row displayed in form one/two - set to next Id
+  setNextId(form) {
+    let newId =
+      form === "formOne" ? this.state.formOneId : this.state.formTwoId;
 
-    if (newId == this.state.employees.length - 1) {
+    if (form === "formOne" && newId == this.state.f1_employees.length - 1) {
+      newId = 0;
+    } else if (
+      form === "formTwo" &&
+      newId == this.state.f2_employees.length - 1
+    ) {
       newId = 0;
     } else {
       newId++;
     }
 
-    this.setState({
-      formOneId: newId,
-    });
+    if (form === "formOne") {
+      this.setState({
+        formOneId: newId,
+      });
+    } else {
+      this.setState({
+        formTwoId: newId,
+      });
+    }
   }
 
-  setLastId() {
-    this.setState({
-      formOneId: this.state.employees.length - 1,
-    });
+  // Used to keep track of current row displayed in form one/two - set to last Id
+  setLastId(form) {
+    if (form === "formOne") {
+      this.setState({
+        formOneId: this.state.f1_employees.length - 1,
+      });
+    } else {
+      this.setState({
+        formTwoId: this.state.f2_employees.length - 1,
+      });
+    }
   }
 
   async componentDidMount() {
@@ -76,7 +147,27 @@ class Employees extends Component {
       .then(
         (result) => {
           this.setState({
-            employees: result,
+            f1_employees: result,
+          });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+    // Form 2: fetch data
+    await fetch(this.state.serverURL + "/form_two/employee", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            f2_employees: result,
           });
         },
         (error) => {
@@ -86,89 +177,307 @@ class Employees extends Component {
   }
 
   render() {
-    const { employees, formOneId } = this.state;
+    const {
+      f1_employees,
+      f2_employees,
+      formOneId,
+      formTwoId,
+      f3_employees,
+      searchId,
+    } = this.state;
 
     return (
-      <div style={{ padding: "40px" }}>
-        <div className="row justify-content-center">
-          <h1 className="display-2">EMPLOYEES TABLE</h1>
+      <div style={{ padding: "40px", paddingBottom: "500px" }}>
+        <div className="row">
+          <h1 className="display-5" style={styles.mainHeader}>
+            EMPLOYEES TABLE
+          </h1>
         </div>
         {/*********************** FORM 1 ***********************/}
-        <div className="row">
-          <h1 style={{ fontSize: "60px", marginBottom: "20px" }}>FORM 1</h1>
-        </div>
 
-        <div className="row" style={{ textAlign: "center" }}>
-          <table className="table table-bordered">
-            <thead className="thead-dark">
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Facility</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">
-                  {employees.length == 0 ? "" : employees[formOneId].emp_id}
-                </th>
-                <td>
-                  {employees.length == 0 ? "" : employees[formOneId].emp_fname}
-                </td>
-                <td>
-                  {employees.length == 0 ? "" : employees[formOneId].emp_lname}
-                </td>
-                <td>
-                  {employees.length == 0 ? "" : employees[formOneId].emp_phone}
-                </td>
-                <td>
-                  {employees.length == 0 ? "" : employees[formOneId].fac_id}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="row" style={{ fontSize: "60px", marginTop: "20px" }}>
+          FORM 1
+        </div>
+        <div class="row">
+          <p>
+            Underlying query: <b>SELECT * FROM employee;</b>
+          </p>
+        </div>
+        <div className="row">
+          <span class="input-group-text" style={styles.inputSpan}>
+            Employee Id
+          </span>
+          <input
+            type="text"
+            class="col-md-3"
+            value={
+              f1_employees.length == 0 ? "" : f1_employees[formOneId].emp_id
+            }
+            disabled
+          />
+        </div>
+        <div className="row">
+          <span class="input-group-text" style={styles.inputSpan}>
+            First Name
+          </span>
+          <input
+            type="text"
+            class="col-md-3"
+            value={
+              f1_employees.length == 0 ? "" : f1_employees[formOneId].emp_fname
+            }
+            disabled
+          />
+        </div>
+        <div className="row">
+          <span class="input-group-text" style={styles.inputSpan}>
+            Last Name
+          </span>
+          <input
+            type="text"
+            class="col-md-3"
+            value={
+              f1_employees.length == 0 ? "" : f1_employees[formOneId].emp_lname
+            }
+            disabled
+          />
+        </div>
+        <div className="row">
+          <span class="input-group-text" style={styles.inputSpan}>
+            Phone
+          </span>
+          <input
+            type="text"
+            class="col-md-3"
+            value={
+              f1_employees.length == 0 ? "" : f1_employees[formOneId].emp_phone
+            }
+            disabled
+          />
+        </div>
+        <div className="row">
+          <span class="input-group-text" style={styles.inputSpan}>
+            Facility Id
+          </span>
+          <input
+            type="text"
+            class="col-md-3"
+            value={
+              f1_employees.length == 0 ? "" : f1_employees[formOneId].fac_id
+            }
+            disabled
+          />
         </div>
         <div className="row">
           <button
-            className="btn btn-primary"
             style={styles.btn}
             onClick={() => {
-              this.setFirstId();
+              this.setFirstId("formOne");
             }}
           >
             First
           </button>
           <button
-            className="btn btn-warning"
             style={styles.btn}
             onClick={() => {
-              this.setPrevioustId();
+              this.setPrevId("formOne");
             }}
           >
             Previous
           </button>
           <button
-            className="btn btn-warning"
             style={styles.btn}
             onClick={() => {
-              this.setNextId();
+              this.setNextId("formOne");
             }}
           >
             Next
           </button>
           <button
-            className="btn btn-primary"
             style={styles.btn}
             onClick={() => {
-              this.setLastId();
+              this.setLastId("formOne");
             }}
           >
             Last
           </button>
         </div>
+
         {/*********************** FORM 2 ***********************/}
+        <div class="row" style={{ fontSize: "60px", marginTop: "20px" }}>
+          FORM 2
+        </div>
+        <div class="row">
+          <p>
+            Underlying query:{" "}
+            <b>
+              SELECT emp_fname, emp_lname, fac_name FROM employee INNER JOIN
+              facility ON employee.fac_id = facility.fac_id;
+            </b>
+          </p>
+        </div>
+        <div className="row">
+          <span class="input-group-text" style={styles.inputSpan}>
+            First Name
+          </span>
+          <input
+            type="text"
+            class=" col-md-3"
+            value={
+              f2_employees.length == 0 ? "" : f2_employees[formTwoId].emp_fname
+            }
+            disabled
+          />
+        </div>
+        <div className="row">
+          <span class="input-group-text" style={styles.inputSpan}>
+            Last Name
+          </span>
+          <input
+            type="text"
+            class=" col-md-3"
+            value={
+              f2_employees.length == 0 ? "" : f2_employees[formTwoId].emp_lname
+            }
+            disabled
+          />
+        </div>
+        <div className="row">
+          <span class="input-group-text" style={styles.inputSpan}>
+            Facility Name
+          </span>
+          <input
+            type="text"
+            class=" col-md-3"
+            value={
+              f2_employees.length == 0 ? "" : f2_employees[formTwoId].fac_name
+            }
+            disabled
+          />
+        </div>
+        <div className="row">
+          <button
+            style={styles.btn}
+            onClick={() => {
+              this.setFirstId("formTwo");
+            }}
+          >
+            First
+          </button>
+          <button
+            style={styles.btn}
+            onClick={() => {
+              this.setPrevId("formTwo");
+            }}
+          >
+            Previous
+          </button>
+          <button
+            style={styles.btn}
+            onClick={() => {
+              this.setNextId("formTwo");
+            }}
+          >
+            Next
+          </button>
+          <button
+            style={styles.btn}
+            onClick={() => {
+              this.setLastId("formTwo");
+            }}
+          >
+            Last
+          </button>
+        </div>
+
+        {/*********************** FORM 3 ***********************/}
+        <div class="row" style={{ fontSize: "60px", marginTop: "20px" }}>
+          FORM 3
+        </div>
+        <div class="row">
+          <p>
+            Underlying query:{" "}
+            <b>
+              SELECT emp_id, emp_fname, emp_lname, emp_phone, fac_id FROM
+              employee WHERE emp_id = [INPUT ID];
+            </b>
+          </p>
+        </div>
+        <div className="row" style={{ marginBottom: "10px" }}>
+          <input
+            type="text"
+            class="col-md-3"
+            style={{ marginRight: "10px" }}
+            placeholder="Search by employee Id"
+            value={searchId}
+            onChange={(e) => {
+              this.setState({ searchId: e.target.value });
+            }}
+          />
+          <button
+            class="col-md-1"
+            onClick={() => {
+              this.search();
+            }}
+          >
+            Search
+          </button>
+        </div>
+        <div className="row" style={{ marginTop: "30px" }}>
+          <span class="input-group-text" style={styles.inputSpan}>
+            Employee Id
+          </span>
+          <input
+            type="text"
+            class=" col-md-3"
+            value={f3_employees.length == 0 ? "" : f3_employees[0].emp_id}
+            disabled
+          />
+        </div>
+        <div className="row">
+          <span class="input-group-text" style={styles.inputSpan}>
+            First Name
+          </span>
+          <input
+            type="text"
+            class=" col-md-3"
+            value={f3_employees.length == 0 ? "" : f3_employees[0].emp_fname}
+            disabled
+          />
+        </div>
+        <div className="row">
+          <span class="input-group-text" style={styles.inputSpan}>
+            Last Name
+          </span>
+          <input
+            type="text"
+            class=" col-md-3"
+            value={f3_employees.length == 0 ? "" : f3_employees[0].emp_lname}
+            disabled
+          />
+        </div>
+        <div className="row">
+          <span class="input-group-text" style={styles.inputSpan}>
+            Phone
+          </span>
+          <input
+            type="text"
+            class=" col-md-3"
+            value={f3_employees.length == 0 ? "" : f3_employees[0].emp_phone}
+            disabled
+          />
+        </div>
+        <div className="row">
+          <span class="input-group-text" style={styles.inputSpan}>
+            Facility
+          </span>
+          <input
+            type="text"
+            class=" col-md-3"
+            value={f3_employees.length == 0 ? "" : f3_employees[0].fac_id}
+            disabled
+          />
+        </div>
       </div>
     );
   }
@@ -178,9 +487,21 @@ const styles = {
   btn: {
     marginTop: "20px",
     marginBottom: "30px",
-    marginRight: "30px",
-    width: "150px",
-    height: "50px",
+    marginRight: "10px",
+    width: "100px",
+    height: "30px",
+  },
+  inputSpan: {
+    marginRight: "20px",
+    background: "white",
+    border: "none",
+    width: "120px",
+    paddingLeft: "0",
+  },
+  mainHeader: {
+    marginBottom: "30px",
+    border: "2px solid black",
+    padding: "20px",
   },
 };
 
