@@ -1,12 +1,14 @@
 import React from "react";
 import { Route } from "react-router";
 import NavMenu from "./components/NavMenu";
+import Members from "./components/Members.js";
 import Employees from "./components/Employees.js";
 
 function App() {
   return (
     <NavMenu>
-      <Route exact path="/" component={Employees} />
+      <Route exact path="/" component={Members} />
+      <Route exact path="/members" component={Members} />
       <Route path="/employees" component={Employees} />
     </NavMenu>
   );

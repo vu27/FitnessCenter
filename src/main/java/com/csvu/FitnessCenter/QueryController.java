@@ -32,15 +32,38 @@ public class QueryController {
         return connector.getMySQLData(queryString);
     }
 
+    // Controller method for Member table FORM 2.
+    // Underlying query includes INNERJOIN.
+    // params: none
+    // return: JSON object array
+    @GetMapping(path = "/form_two/member")
+    public @ResponseBody JSONArray formTwoMember() {
+
+        String queryString = "SELECT mem_fname, mem_lname, tier_name FROM member INNER JOIN membership_tier ON member.tier_code = membership_tier.tier_code;";
+        return connector.getMySQLData(queryString);
+    }
+
     // Controller method for Employee table FORM 3.
     // Searches for an employee by Id.
     // params: int employeeId
     // return: JSON object array
     @GetMapping(path = "/form_three/employee/{employeeId}")
-    public @ResponseBody JSONArray formOne(@PathVariable int employeeId) {
+    public @ResponseBody JSONArray formThreeEmployee(@PathVariable int employeeId) {
 
         String queryString = "SELECT emp_id, emp_fname, emp_lname, emp_phone, fac_id FROM vu_db.employee WHERE emp_id = "
                 + employeeId + ";";
+        return connector.getMySQLData(queryString);
+    }
+
+    // Controller method for Member table FORM 3.
+    // Searches for an member by Id.
+    // params: int employeeId
+    // return: JSON object array
+    @GetMapping(path = "/form_three/member/{memberId}")
+    public @ResponseBody JSONArray formThreeMember(@PathVariable int memberId) {
+
+        String queryString = "SELECT mem_id, mem_fname, mem_lname, mem_email, mem_is_active, mem_total_paid, tier_code FROM vu_db.member WHERE mem_id = "
+                + memberId + ";";
         return connector.getMySQLData(queryString);
     }
 }
