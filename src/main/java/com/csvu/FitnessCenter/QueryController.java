@@ -56,7 +56,7 @@ public class QueryController {
     }
 
     // Controller method for Member table FORM 3.
-    // Searches for an member by Id.
+    // Searches for a member by Id.
     // params: int employeeId
     // return: JSON object array
     @GetMapping(path = "/form_three/member/{memberId}")
@@ -64,6 +64,18 @@ public class QueryController {
 
         String queryString = "SELECT mem_id, mem_fname, mem_lname, mem_email, mem_is_active, mem_total_paid, tier_code FROM vu_db.member WHERE mem_id = "
                 + memberId + ";";
+        return connector.getMySQLData(queryString);
+    }
+
+    // Controller method for Member table FORM 3.
+    // Searches for membership tier by tier code.
+    // params: int tierCode
+    // return: JSON object array
+    @GetMapping(path = "/form_three/tier/{tierCode}")
+    public @ResponseBody JSONArray formThreeTier(@PathVariable int tierCode) {
+
+        String queryString = "SELECT tier_code, tier_name, tier_price FROM vu_db.membership_tier WHERE tier_code = "
+                + tierCode + ";";
         return connector.getMySQLData(queryString);
     }
 }

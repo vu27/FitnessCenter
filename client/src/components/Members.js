@@ -192,32 +192,32 @@ class Members extends Component {
         </div>
         {/*********************** FORM 1 ***********************/}
 
-        <div class="row" style={{ fontSize: "60px", marginTop: "20px" }}>
+        <div className="row" style={{ fontSize: "60px", marginTop: "20px" }}>
           FORM 1
         </div>
-        <div class="row">
+        <div className="row">
           <p>
             Underlying query: <b>SELECT * FROM member;</b>
           </p>
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Member Id
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={f1_members.length == 0 ? "" : f1_members[formOneId].mem_id}
             disabled
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             First Name
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f1_members.length == 0 ? "" : f1_members[formOneId].mem_fname
             }
@@ -225,12 +225,12 @@ class Members extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Last Name
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f1_members.length == 0 ? "" : f1_members[formOneId].mem_lname
             }
@@ -238,12 +238,12 @@ class Members extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Email
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f1_members.length == 0 ? "" : f1_members[formOneId].mem_email
             }
@@ -251,12 +251,12 @@ class Members extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Is Account Active
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f1_members.length == 0 ? "" : f1_members[formOneId].mem_is_active
             }
@@ -264,12 +264,12 @@ class Members extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Total Paid
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f1_members.length == 0 ? "" : f1_members[formOneId].mem_total_paid
             }
@@ -277,12 +277,12 @@ class Members extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Tier Code
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f1_members.length == 0 ? "" : f1_members[formOneId].tier_code
             }
@@ -325,10 +325,10 @@ class Members extends Component {
         </div>
 
         {/*********************** FORM 2 ***********************/}
-        <div class="row" style={{ fontSize: "60px", marginTop: "20px" }}>
+        <div className="row" style={{ fontSize: "60px", marginTop: "20px" }}>
           FORM 2
         </div>
-        <div class="row">
+        <div className="row">
           <p>
             Underlying query:{" "}
             <b>
@@ -338,12 +338,12 @@ class Members extends Component {
           </p>
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             First Name
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={
               f2_members.length == 0 ? "" : f2_members[formTwoId].mem_fname
             }
@@ -351,12 +351,12 @@ class Members extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Last Name
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={
               f2_members.length == 0 ? "" : f2_members[formTwoId].mem_lname
             }
@@ -364,12 +364,12 @@ class Members extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Tier Name
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={
               f2_members.length == 0 ? "" : f2_members[formTwoId].tier_name
             }
@@ -412,10 +412,10 @@ class Members extends Component {
         </div>
 
         {/*********************** FORM 3 ***********************/}
-        <div class="row" style={{ fontSize: "60px", marginTop: "20px" }}>
+        <div className="row" style={{ fontSize: "60px", marginTop: "20px" }}>
           FORM 3
         </div>
-        <div class="row">
+        <div className="row">
           <p>
             Underlying query:{" "}
             <b>
@@ -427,16 +427,16 @@ class Members extends Component {
         <div className="row" style={{ marginBottom: "10px" }}>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-4"
             style={{ marginRight: "10px" }}
-            placeholder="Search by member Id"
+            placeholder="Search by Id"
             value={searchId}
             onChange={(e) => {
               this.setState({ searchId: e.target.value });
             }}
           />
           <button
-            class="col-md-1"
+            className="col-md-2"
             onClick={() => {
               this.search();
             }}
@@ -445,56 +445,56 @@ class Members extends Component {
           </button>
         </div>
         <div className="row" style={{ marginTop: "30px" }}>
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Member Id
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={f3_members.length == 0 ? "" : f3_members[0].mem_id}
             disabled
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             First Name
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={f3_members.length == 0 ? "" : f3_members[0].mem_fname}
             disabled
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Last Name
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={f3_members.length == 0 ? "" : f3_members[0].mem_lname}
             disabled
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Email
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={f3_members.length == 0 ? "" : f3_members[0].mem_email}
             disabled
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Is Account Active
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f3_members.length == 0 ? "" : f3_members[0].mem_is_active
             }
@@ -502,12 +502,12 @@ class Members extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Total Paid
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f3_members.length == 0 ? "" : f3_members[0].mem_total_paid
             }
@@ -515,12 +515,12 @@ class Members extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Tier Code
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f3_members.length == 0 ? "" : f3_members[0].tier_code
             }

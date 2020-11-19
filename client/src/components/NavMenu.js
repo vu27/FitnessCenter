@@ -23,7 +23,7 @@ class Nav extends Component {
               Members
             </Link>
             <Link
-              to="tier"
+              to="tiers"
               className="list-group-item list-group-item-action bg-light"
             >
               Membership Tiers

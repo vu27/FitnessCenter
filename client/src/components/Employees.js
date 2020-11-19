@@ -195,21 +195,21 @@ class Employees extends Component {
         </div>
         {/*********************** FORM 1 ***********************/}
 
-        <div class="row" style={{ fontSize: "60px", marginTop: "20px" }}>
+        <div className="row" style={{ fontSize: "60px", marginTop: "20px" }}>
           FORM 1
         </div>
-        <div class="row">
+        <div className="row">
           <p>
             Underlying query: <b>SELECT * FROM employee;</b>
           </p>
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Employee Id
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f1_employees.length == 0 ? "" : f1_employees[formOneId].emp_id
             }
@@ -217,12 +217,12 @@ class Employees extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             First Name
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f1_employees.length == 0 ? "" : f1_employees[formOneId].emp_fname
             }
@@ -230,12 +230,12 @@ class Employees extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Last Name
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f1_employees.length == 0 ? "" : f1_employees[formOneId].emp_lname
             }
@@ -243,12 +243,12 @@ class Employees extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Phone
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f1_employees.length == 0 ? "" : f1_employees[formOneId].emp_phone
             }
@@ -256,12 +256,12 @@ class Employees extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Facility Id
           </span>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-3"
             value={
               f1_employees.length == 0 ? "" : f1_employees[formOneId].fac_id
             }
@@ -304,10 +304,10 @@ class Employees extends Component {
         </div>
 
         {/*********************** FORM 2 ***********************/}
-        <div class="row" style={{ fontSize: "60px", marginTop: "20px" }}>
+        <div className="row" style={{ fontSize: "60px", marginTop: "20px" }}>
           FORM 2
         </div>
-        <div class="row">
+        <div className="row">
           <p>
             Underlying query:{" "}
             <b>
@@ -317,12 +317,12 @@ class Employees extends Component {
           </p>
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             First Name
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={
               f2_employees.length == 0 ? "" : f2_employees[formTwoId].emp_fname
             }
@@ -330,12 +330,12 @@ class Employees extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Last Name
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={
               f2_employees.length == 0 ? "" : f2_employees[formTwoId].emp_lname
             }
@@ -343,12 +343,12 @@ class Employees extends Component {
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Facility Name
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={
               f2_employees.length == 0 ? "" : f2_employees[formTwoId].fac_name
             }
@@ -391,10 +391,10 @@ class Employees extends Component {
         </div>
 
         {/*********************** FORM 3 ***********************/}
-        <div class="row" style={{ fontSize: "60px", marginTop: "20px" }}>
+        <div className="row" style={{ fontSize: "60px", marginTop: "20px" }}>
           FORM 3
         </div>
-        <div class="row">
+        <div className="row">
           <p>
             Underlying query:{" "}
             <b>
@@ -406,16 +406,16 @@ class Employees extends Component {
         <div className="row" style={{ marginBottom: "10px" }}>
           <input
             type="text"
-            class="col-md-3"
+            className="col-md-4"
             style={{ marginRight: "10px" }}
-            placeholder="Search by employee Id"
+            placeholder="Search by Id"
             value={searchId}
             onChange={(e) => {
               this.setState({ searchId: e.target.value });
             }}
           />
           <button
-            class="col-md-1"
+            className="col-md-2"
             onClick={() => {
               this.search();
             }}
@@ -424,56 +424,56 @@ class Employees extends Component {
           </button>
         </div>
         <div className="row" style={{ marginTop: "30px" }}>
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Employee Id
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={f3_employees.length == 0 ? "" : f3_employees[0].emp_id}
             disabled
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             First Name
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={f3_employees.length == 0 ? "" : f3_employees[0].emp_fname}
             disabled
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Last Name
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={f3_employees.length == 0 ? "" : f3_employees[0].emp_lname}
             disabled
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Phone
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={f3_employees.length == 0 ? "" : f3_employees[0].emp_phone}
             disabled
           />
         </div>
         <div className="row">
-          <span class="input-group-text" style={styles.inputSpan}>
+          <span className="input-group-text" style={styles.inputSpan}>
             Facility
           </span>
           <input
             type="text"
-            class=" col-md-3"
+            className=" col-md-3"
             value={f3_employees.length == 0 ? "" : f3_employees[0].fac_id}
             disabled
           />
