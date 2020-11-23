@@ -43,6 +43,17 @@ public class QueryController {
         return connector.getMySQLData(queryString);
     }
 
+    // Controller method for Equipment table FORM 2.
+    // Underlying query includes INNERJOIN.
+    // params: none
+    // return: JSON object array
+    @GetMapping(path = "/form_two/equipment")
+    public @ResponseBody JSONArray formTwoEquipment() {
+
+        String queryString = "SELECT equip_name, fac_name FROM equipment INNER JOIN facility ON equipment.fac_id = facility.fac_id;";
+        return connector.getMySQLData(queryString);
+    }
+
     // Controller method for Employee table FORM 3.
     // Searches for an employee by Id.
     // params: int employeeId
@@ -86,8 +97,19 @@ public class QueryController {
     @GetMapping(path = "/form_three/facility/{facilityId}")
     public @ResponseBody JSONArray formThreeFacility(@PathVariable int facilityId) {
 
-        String queryString = "SELECT fac_id, fac_name FROM vu_db.facility WHERE fac_id = "
-                + facilityId + ";";
+        String queryString = "SELECT fac_id, fac_name FROM vu_db.facility WHERE fac_id = " + facilityId + ";";
+        return connector.getMySQLData(queryString);
+    }
+
+    // Controller method for Equipment table FORM 3.
+    // Searches for Equipment by id.
+    // params: int equipId
+    // return: JSON object array
+    @GetMapping(path = "/form_three/equipment/{equipId}")
+    public @ResponseBody JSONArray formThreeEquipment(@PathVariable int equipId) {
+
+        String queryString = "SELECT equip_id, equip_name, equip_quantity, fac_id FROM vu_db.equipment WHERE equip_id = "
+                + equipId + ";";
         return connector.getMySQLData(queryString);
     }
 }
