@@ -3,6 +3,7 @@ import { Route } from "react-router";
 import NavMenu from "./components/NavMenu";
 import Members from "./components/Members.js";
 import Tiers from "./components/Tiers.js";
+import Facilities from "./components/Facilities.js";
 import Employees from "./components/Employees.js";
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
       <Route exact path="/" component={Members} />
       <Route exact path="/members" component={Members} />
       <Route exact path="/tiers" component={Tiers} />
-      <Route path="/employees" component={Employees} />
+      <Route exact path="/facilities" component={Facilities} />
+      <Route exact path="/employees" component={Employees} />
     </NavMenu>
   );
 }

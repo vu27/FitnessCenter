@@ -29,7 +29,7 @@ class Nav extends Component {
               Membership Tiers
             </Link>
             <Link
-              to="facility"
+              to="facilities"
               className="list-group-item list-group-item-action bg-light"
             >
               Facilities

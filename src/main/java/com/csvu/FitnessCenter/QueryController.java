@@ -78,4 +78,16 @@ public class QueryController {
                 + tierCode + ";";
         return connector.getMySQLData(queryString);
     }
+
+    // Controller method for Facility table FORM 3.
+    // Searches for facilty by id.
+    // params: int facilityId
+    // return: JSON object array
+    @GetMapping(path = "/form_three/facility/{facilityId}")
+    public @ResponseBody JSONArray formThreeFacility(@PathVariable int facilityId) {
+
+        String queryString = "SELECT fac_id, fac_name FROM vu_db.facility WHERE fac_id = "
+                + facilityId + ";";
+        return connector.getMySQLData(queryString);
+    }
 }
