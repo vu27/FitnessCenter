@@ -54,6 +54,17 @@ public class QueryController {
         return connector.getMySQLData(queryString);
     }
 
+    // Controller method for Jobs table FORM 2.
+    // Underlying query includes INNERJOIN.
+    // params: none
+    // return: JSON object array
+    @GetMapping(path = "/form_two/job")
+    public @ResponseBody JSONArray formTwoJob() {
+
+        String queryString = "SELECT job_code, job_dec, emp_lname FROM job INNER JOIN employee ON employee.emp_id = job.emp_id;";
+        return connector.getMySQLData(queryString);
+    }
+
     // Controller method for Employee table FORM 3.
     // Searches for an employee by Id.
     // params: int employeeId
@@ -110,6 +121,17 @@ public class QueryController {
 
         String queryString = "SELECT equip_id, equip_name, equip_quantity, fac_id FROM vu_db.equipment WHERE equip_id = "
                 + equipId + ";";
+        return connector.getMySQLData(queryString);
+    }
+
+    // Controller method for Job table FORM 3.
+    // Searches for Job by codeId.
+    // params: int codeId
+    // return: JSON object array
+    @GetMapping(path = "/form_three/job/{codeId}")
+    public @ResponseBody JSONArray formThreeJob(@PathVariable int codeId) {
+
+        String queryString = "SELECT job_code, job_dec, job_salary, emp_id FROM job WHERE job_code = " + codeId + ";";
         return connector.getMySQLData(queryString);
     }
 }

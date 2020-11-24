@@ -131,8 +131,7 @@ class Facilities extends Component {
   async componentDidMount() {
     // Set base URL to backend server
     await this.setState({
-      serverURL: "http://localhost:8080",
-      // serverURL: window.location.origin
+      serverURL: window.location.origin
     });
 
     // Form 1: fetch data

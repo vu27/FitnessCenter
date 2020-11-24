@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 
-class Employees extends Component {
+class Jobs extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       serverURL: "",
       // Form 1
-      f1_employees: [],
+      f1_jobs: [],
       formOneId: 0,
       // Form 2
-      f2_employees: [],
+      f2_jobs: [],
       formTwoId: 0,
       // Form 3
-      f3_employees: [],
+      f3_jobs: [],
       searchId: "",
     };
 
@@ -26,21 +26,18 @@ class Employees extends Component {
 
   // Search function for form 3
   search() {
-    fetch(
-      this.state.serverURL + "/form_three/employee/" + this.state.searchId,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    fetch(this.state.serverURL + "/form_three/job/" + this.state.searchId, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => res.json())
       .then(
         (result) => {
           this.setState({
-            f3_employees: result,
+            f3_jobs: result,
           });
         },
         (error) => {
@@ -69,9 +66,9 @@ class Employees extends Component {
 
     if (newId == 0) {
       if (form === "formOne") {
-        newId = this.state.f1_employees.length - 1;
+        newId = this.state.f1_jobs.length - 1;
       } else {
-        newId = this.state.f2_employees.length - 1;
+        newId = this.state.f2_jobs.length - 1;
       }
     } else {
       newId--;
@@ -93,11 +90,11 @@ class Employees extends Component {
     let newId =
       form === "formOne" ? this.state.formOneId : this.state.formTwoId;
 
-    if (form === "formOne" && newId == this.state.f1_employees.length - 1) {
+    if (form === "formOne" && newId == this.state.f1_jobs.length - 1) {
       newId = 0;
     } else if (
       form === "formTwo" &&
-      newId == this.state.f2_employees.length - 1
+      newId == this.state.f2_jobs.length - 1
     ) {
       newId = 0;
     } else {
@@ -119,11 +116,11 @@ class Employees extends Component {
   setLastId(form) {
     if (form === "formOne") {
       this.setState({
-        formOneId: this.state.f1_employees.length - 1,
+        formOneId: this.state.f1_jobs.length - 1,
       });
     } else {
       this.setState({
-        formTwoId: this.state.f2_employees.length - 1,
+        formTwoId: this.state.f2_jobs.length - 1,
       });
     }
   }
@@ -135,7 +132,7 @@ class Employees extends Component {
     });
 
     // Form 1: fetch data
-    await fetch(this.state.serverURL + "/form_one/employee", {
+    await fetch(this.state.serverURL + "/form_one/job", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -146,7 +143,7 @@ class Employees extends Component {
       .then(
         (result) => {
           this.setState({
-            f1_employees: result,
+            f1_jobs: result,
           });
         },
         (error) => {
@@ -155,7 +152,7 @@ class Employees extends Component {
       );
 
     // Form 2: fetch data
-    await fetch(this.state.serverURL + "/form_two/employee", {
+    await fetch(this.state.serverURL + "/form_two/job", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -166,7 +163,7 @@ class Employees extends Component {
       .then(
         (result) => {
           this.setState({
-            f2_employees: result,
+            f2_jobs: result,
           });
         },
         (error) => {
@@ -177,11 +174,11 @@ class Employees extends Component {
 
   render() {
     const {
-      f1_employees,
-      f2_employees,
+      f1_jobs,
+      f2_jobs,
       formOneId,
       formTwoId,
-      f3_employees,
+      f3_jobs,
       searchId,
     } = this.state;
 
@@ -189,7 +186,7 @@ class Employees extends Component {
       <div style={{ padding: "40px", paddingBottom: "500px" }}>
         <div className="row">
           <h1 className="display-5" style={styles.mainHeader}>
-            EMPLOYEES TABLE
+            JOBS TABLE
           </h1>
         </div>
         {/*********************** FORM 1 ***********************/}
@@ -199,71 +196,50 @@ class Employees extends Component {
         </div>
         <div className="row">
           <p>
-            Underlying query: <b>SELECT * FROM employee;</b>
+            Underlying query: <b>SELECT * FROM job;</b>
           </p>
         </div>
         <div className="row">
           <span className="input-group-text" style={styles.inputSpan}>
-            Employee Id
+            Job Id
           </span>
           <input
             type="text"
             className="col-md-3"
-            value={
-              f1_employees.length == 0 ? "" : f1_employees[formOneId].emp_id
-            }
+            value={f1_jobs.length == 0 ? "" : f1_jobs[formOneId].job_code}
             disabled
           />
         </div>
         <div className="row">
           <span className="input-group-text" style={styles.inputSpan}>
-            First Name
+            Job Description
           </span>
           <input
             type="text"
             className="col-md-3"
-            value={
-              f1_employees.length == 0 ? "" : f1_employees[formOneId].emp_fname
-            }
+            value={f1_jobs.length == 0 ? "" : f1_jobs[formOneId].job_dec}
             disabled
           />
         </div>
         <div className="row">
           <span className="input-group-text" style={styles.inputSpan}>
-            Last Name
+            Job Salary
           </span>
           <input
             type="text"
             className="col-md-3"
-            value={
-              f1_employees.length == 0 ? "" : f1_employees[formOneId].emp_lname
-            }
+            value={f1_jobs.length == 0 ? "" : f1_jobs[formOneId].job_salary}
             disabled
           />
         </div>
         <div className="row">
           <span className="input-group-text" style={styles.inputSpan}>
-            Phone
+            Employee ID
           </span>
           <input
             type="text"
             className="col-md-3"
-            value={
-              f1_employees.length == 0 ? "" : f1_employees[formOneId].emp_phone
-            }
-            disabled
-          />
-        </div>
-        <div className="row">
-          <span className="input-group-text" style={styles.inputSpan}>
-            Facility Id
-          </span>
-          <input
-            type="text"
-            className="col-md-3"
-            value={
-              f1_employees.length == 0 ? "" : f1_employees[formOneId].fac_id
-            }
+            value={f1_jobs.length == 0 ? "" : f1_jobs[formOneId].emp_id}
             disabled
           />
         </div>
@@ -310,46 +286,46 @@ class Employees extends Component {
           <p>
             Underlying query:{" "}
             <b>
-              SELECT emp_fname, emp_lname, fac_name FROM employee INNER JOIN
-              facility ON employee.fac_id = facility.fac_id;
+              SELECT job_code, job_dec, emp_lname FROM job INNER JOIN employee
+              ON employee.emp_id = job.emp_id;
             </b>
           </p>
         </div>
         <div className="row">
           <span className="input-group-text" style={styles.inputSpan}>
-            First Name
+            Job Code
           </span>
           <input
             type="text"
             className=" col-md-3"
             value={
-              f2_employees.length == 0 ? "" : f2_employees[formTwoId].emp_fname
+              f2_jobs.length == 0 ? "" : f2_jobs[formTwoId].job_code
             }
             disabled
           />
         </div>
         <div className="row">
           <span className="input-group-text" style={styles.inputSpan}>
-            Last Name
+            Job Description
           </span>
           <input
             type="text"
             className=" col-md-3"
             value={
-              f2_employees.length == 0 ? "" : f2_employees[formTwoId].emp_lname
+              f2_jobs.length == 0 ? "" : f2_jobs[formTwoId].job_dec
             }
             disabled
           />
         </div>
         <div className="row">
           <span className="input-group-text" style={styles.inputSpan}>
-            Facility Name
+            Emp Last Name
           </span>
           <input
             type="text"
             className=" col-md-3"
             value={
-              f2_employees.length == 0 ? "" : f2_employees[formTwoId].fac_name
+              f2_jobs.length == 0 ? "" : f2_jobs[formTwoId].emp_lname
             }
             disabled
           />
@@ -397,8 +373,8 @@ class Employees extends Component {
           <p>
             Underlying query:{" "}
             <b>
-              SELECT emp_id, emp_fname, emp_lname, emp_phone, fac_id FROM
-              employee WHERE emp_id = [INPUT ID];
+              SELECT job_code, job_dec, job_salary, emp_id FROM job WHERE
+              job_code = [INPUT ID];
             </b>
           </p>
         </div>
@@ -407,7 +383,7 @@ class Employees extends Component {
             type="text"
             className="col-md-4"
             style={{ marginRight: "10px" }}
-            placeholder="Search by Id"
+            placeholder="Search by code Id"
             value={searchId}
             onChange={(e) => {
               this.setState({ searchId: e.target.value });
@@ -424,56 +400,45 @@ class Employees extends Component {
         </div>
         <div className="row" style={{ marginTop: "30px" }}>
           <span className="input-group-text" style={styles.inputSpan}>
+            Job Code
+          </span>
+          <input
+            type="text"
+            className=" col-md-3"
+            value={f3_jobs.length == 0 ? "" : f3_jobs[0].job_code}
+            disabled
+          />
+        </div>
+        <div className="row">
+          <span className="input-group-text" style={styles.inputSpan}>
+            Jobs Description
+          </span>
+          <input
+            type="text"
+            className=" col-md-3"
+            value={f3_jobs.length == 0 ? "" : f3_jobs[0].job_dec}
+            disabled
+          />
+        </div>
+        <div className="row">
+          <span className="input-group-text" style={styles.inputSpan}>
+            Job Salary
+          </span>
+          <input
+            type="text"
+            className=" col-md-3"
+            value={f3_jobs.length == 0 ? "" : f3_jobs[0].job_salary}
+            disabled
+          />
+        </div>
+        <div className="row">
+          <span className="input-group-text" style={styles.inputSpan}>
             Employee Id
           </span>
           <input
             type="text"
             className=" col-md-3"
-            value={f3_employees.length == 0 ? "" : f3_employees[0].emp_id}
-            disabled
-          />
-        </div>
-        <div className="row">
-          <span className="input-group-text" style={styles.inputSpan}>
-            First Name
-          </span>
-          <input
-            type="text"
-            className=" col-md-3"
-            value={f3_employees.length == 0 ? "" : f3_employees[0].emp_fname}
-            disabled
-          />
-        </div>
-        <div className="row">
-          <span className="input-group-text" style={styles.inputSpan}>
-            Last Name
-          </span>
-          <input
-            type="text"
-            className=" col-md-3"
-            value={f3_employees.length == 0 ? "" : f3_employees[0].emp_lname}
-            disabled
-          />
-        </div>
-        <div className="row">
-          <span className="input-group-text" style={styles.inputSpan}>
-            Phone
-          </span>
-          <input
-            type="text"
-            className=" col-md-3"
-            value={f3_employees.length == 0 ? "" : f3_employees[0].emp_phone}
-            disabled
-          />
-        </div>
-        <div className="row">
-          <span className="input-group-text" style={styles.inputSpan}>
-            Facility
-          </span>
-          <input
-            type="text"
-            className=" col-md-3"
-            value={f3_employees.length == 0 ? "" : f3_employees[0].fac_id}
+            value={f3_jobs.length == 0 ? "" : f3_jobs[0].emp_id}
             disabled
           />
         </div>
@@ -504,4 +469,4 @@ const styles = {
   },
 };
 
-export default Employees;
+export default Jobs;

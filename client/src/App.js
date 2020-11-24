@@ -6,6 +6,7 @@ import Tiers from "./components/Tiers.js";
 import Facilities from "./components/Facilities.js";
 import Equipment from "./components/Equipment.js";
 import Employees from "./components/Employees.js";
+import Jobs from "./components/Jobs.js";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route exact path="/facilities" component={Facilities} />
       <Route exact path="/equipment" component={Equipment} />
       <Route exact path="/employees" component={Employees} />
+      <Route exact path="/jobs" component={Jobs} />
     </NavMenu>
   );
 }

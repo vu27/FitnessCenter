@@ -47,7 +47,7 @@ class Nav extends Component {
               Employees
             </Link>
             <Link
-              to="job"
+              to="jobs"
               className="list-group-item list-group-item-action bg-light"
             >
               Jobs
